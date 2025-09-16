@@ -1,0 +1,77 @@
+{
+    "product": [
+        {
+            "id": 1,
+            "name": "Truyện Thiên sứ nhà bên",
+            "image": "abc.jpg",
+            "price": 85000,
+            "quantity": 100,
+            "created_at": "1/1/2000"
+        }
+    ],
+    "students": [
+        {
+            "id": 1,
+            "student_name": "Nguyen Van A",
+            "email": "vana@example.com",
+            "address": "123 Tran Hung Dao, Ha Noi",
+            "phone": "0912345678",
+            "status": true,
+            "created_at": "2025-09-15T08:30:00Z"
+        },
+        {
+            "id": 2,
+            "student_name": "Tran Thi B",
+            "email": "thib@example.com",
+            "address": "456 Le Loi, Ho Chi Minh City",
+            "phone": "0987654321",
+            "status": false,
+            "created_at": "2025-09-14T14:20:00Z"
+        },
+        {
+            "id": 3,
+            "student_name": "Le Van C",
+            "email": "vanc@example.com",
+            "address": "789 Nguyen Trai, Da Nang",
+            "phone": "0905123456",
+            "status": true,
+            "created_at": "2025-09-13T10:00:00Z"
+        },
+        {
+            "id": 4,
+            "student_name": "Pham Thi D",
+            "email": "thid@example.com",
+            "address": "321 Phan Boi Chau, Hue",
+            "phone": "0932123456",
+            "status": true,
+            "created_at": "2025-09-12T16:45:00Z"
+        },
+        {
+            "id": 5,
+            "student_name": "Hoang Van E",
+            "email": "vane@example.com",
+            "address": "654 Ly Thuong Kiet, Can Tho",
+            "phone": "0977123456",
+            "status": false,
+            "created_at": "2025-09-11T09:15:00Z"
+        },
+        {
+            "id": 61,
+            "student_name": "Admin",
+            "email": "admin@gmail.com",
+            "address": "Ha Noi",
+            "phone": "0822817206",
+            "status": true,
+            "created_at": "15/09/2025"
+        },
+        {
+            "id": 29,
+            "student_name": "Tran Duong",
+            "email": "duong@gmail.com",
+            "address": "Ha Noi",
+            "phone": "0822817206",
+            "status": true,
+            "created_at": "15/09/2025"
+        }
+    ]
+}

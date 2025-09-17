@@ -1,0 +1,69 @@
+{
+  "todolist": [
+    {
+      "id": "1",
+      "text": "Mua cà phê sữa đá",
+      "completed": true
+    },
+    {
+      "id": "2",
+      "text": "Tập thể dục ",
+      "completed": true
+    },
+    {
+      "id": "3",
+      "text": "Viết báo cáo hàng tuần",
+      "completed": true
+    },
+    {
+      "id": "29",
+      "text": "Nấu ăn ",
+      "completed": true
+    },
+    {
+      "id": "59",
+      "text": "Đi học",
+      "completed": true
+    },
+    {
+      "id": "45",
+      "text": "Chơi game",
+      "completed": false
+    },
+    {
+      "id": "367",
+      "text": "Đi ngủ",
+      "completed": false
+    },
+    {
+      "id": "16",
+      "text": "Đi dạo",
+      "completed": false
+    },
+    {
+      "id": "43",
+      "text": "Chạy deadline",
+      "completed": false
+    },
+    {
+      "id": "460",
+      "text": "Giặt quần áo",
+      "completed": false
+    },
+    {
+      "id": "337",
+      "text": "Giặt quần áo",
+      "completed": false
+    },
+    {
+      "id": "175",
+      "text": "Quét nhà",
+      "completed": false
+    },
+    {
+      "id": "241",
+      "text": "Lau nhà",
+      "completed": false
+    }
+  ]
+}

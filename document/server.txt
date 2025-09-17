@@ -1,0 +1,3 @@
+npm init --y
+npm i json-server
+    "start": "json-server --watch --port 8080 database.json"

@@ -1,0 +1,22 @@
+.scroll-container {
+    height: 223px;
+    overflow-y: auto;
+    scroll-behavior: smooth; /* scroll mượt */
+    padding-right: 8px;
+}
+
+/* Tùy chỉnh scrollbar (Webkit: Chrome, Edge, Safari) */
+.scroll-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scroll-container::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 4px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+    background-color: #4f7fe6;
+    border-radius: 4px;
+    border: 2px solid #f0f0f0;
+}

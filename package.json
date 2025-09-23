@@ -1,5 +1,8 @@
 {
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/material": "^7.3.2",
     "antd": "^5.27.4",
     "react-redux": "^9.2.0",
     "redux": "^5.0.1"

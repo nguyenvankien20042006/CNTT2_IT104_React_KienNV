@@ -1,0 +1,22 @@
+{
+  "tasks": [
+    {
+      "id": "3",
+      "title": "Đọc tài liệu ",
+      "priority": "MEDIUM",
+      "completed": false
+    },
+    {
+      "id": "4",
+      "title": "Ôn lại TypeScript",
+      "priority": "HIGH",
+      "completed": false
+    },
+    {
+      "id": "5",
+      "title": "Viết mini project",
+      "priority": "MEDIUM",
+      "completed": true
+    }
+  ]
+}

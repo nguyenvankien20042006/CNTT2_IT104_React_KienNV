@@ -1,0 +1,74 @@
+{
+  "books": [
+    {
+      "id": 1,
+      "title": "Clean Code",
+      "author": "Robert C. Martin",
+      "year": 2008,
+      "category": "Programming"
+    },
+    {
+      "id": 2,
+      "title": "The Pragmatic Programmer",
+      "author": "Andrew Hunt",
+      "year": 1999,
+      "category": "Programming"
+    },
+    {
+      "id": 3,
+      "title": "Design Patterns",
+      "author": "Erich Gamma",
+      "year": 1994,
+      "category": "Software Engineering"
+    },
+    {
+      "id": 4,
+      "title": "Introduction to Algorithms",
+      "author": "Thomas H. Cormen",
+      "year": 2009,
+      "category": "Algorithms"
+    },
+    {
+      "id": 5,
+      "title": "Artificial Intelligence: A Modern Approach",
+      "author": "Stuart Russell",
+      "year": 2010,
+      "category": "Artificial Intelligence"
+    },
+    {
+      "id": 6,
+      "title": "Code Complete",
+      "author": "Steve McConnell",
+      "year": 2004,
+      "category": "Programming"
+    },
+    {
+      "id": 7,
+      "title": "Refactoring",
+      "author": "Martin Fowler",
+      "year": 1999,
+      "category": "Programming"
+    },
+    {
+      "id": 8,
+      "title": "Structure and Interpretation of Computer Programs",
+      "author": "Harold Abelson",
+      "year": 1996,
+      "category": "Computer Science"
+    },
+    {
+      "id": 10,
+      "title": "Deep Learning",
+      "author": "Ian Goodfellow",
+      "year": 2016,
+      "category": "Machine Learning"
+    },
+    {
+      "title": "Admin",
+      "author": "Atmin",
+      "year": "2025",
+      "category": "Stories",
+      "id": 229
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "users": [
+    {
+      "username": "vinh@gmail.com",
+      "password": "123456",
+      "id": "1"
+    },
+    {
+      "username": "vinh1@gmail.com",
+      "password": "123456",
+      "id": "2"
+    },
+    {
+      "username": "vinh2@gmail.com",
+      "password": "123456",
+      "id": "3"
+    },
+    {
+      "username": "meo4@gmail.com",
+      "password": "123456",
+      "id": "4"
+    },
+    {
+      "id": "aa0b",
+      "username": "kien8@gmail.com",
+      "password": "123456"
+    }
+  ],
+  "financialData": [
+    {
+      "id": "1",
+      "month": "2025-09",
+      "budget": 5000000,
+      "balance": 5000000
+    },
+    {
+      "id": "2",
+      "month": "2025-10",
+      "budget": 59999,
+      "balance": 6000000
+    }
+  ]
+}

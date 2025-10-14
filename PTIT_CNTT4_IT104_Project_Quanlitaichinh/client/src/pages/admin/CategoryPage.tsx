@@ -1,5 +1,8 @@
+/* eslint-disable prefer-const */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // src/components/CategoryPage.tsx
-import React, { useState, useMemo } from "react";
+import axios from "axios";
+import React, { useState, useMemo, useCallback, useEffect } from "react";
 
 // Định nghĩa kiểu dữ liệu cho danh mục
 interface Category {
@@ -28,17 +31,74 @@ const initialCategories: Category[] = [
 ];
 
 const CategoryPage: React.FC = () => {
-  const [categories, setCategories] = useState<Category[]>(initialCategories);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const categoriesPerPage = 5; // Mỗi trang 5 đối tượng
+  const categoriesPerPage = 5;
 
   const [showCategoryModal, setShowCategoryModal] = useState(false);
-  const [editingCategory, setEditingCategory] = useState<Category | null>(null); // Dùng cho cả thêm và cập nhật
+  const [editingCategory, setEditingCategory] = useState<Category | null>(null);
   const [categoryName, setCategoryName] = useState("");
-  const [categoryImage, setCategoryImage] = useState(""); // Để lưu URL/icon đã upload
-  const [uploadedFileName, setUploadedFileName] = useState<string | null>(null); // Tên file hiển thị
-  const [previewImage, setPreviewImage] = useState<string | null>(null); // Ảnh xem trước khi upload
+  const [categoryImage, setCategoryImage] = useState("");
+  const [uploadedFileName, setUploadedFileName] = useState<string | null>(null);
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
+
+  // === API CALLS ===
+  const fetchCategories = useCallback(async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/categories");
+      setCategories(response.data);
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+      alert("Failed to load categories.");
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchCategories();
+  }, [fetchCategories]);
+
+  const addCategory = async (newCat: Omit<Category, "id" | "status">) => {
+    try {
+      const response = await axios.post("http://localhost:8080/categories", {
+        ...newCat,
+        id: Date.now().toString(), // Generate unique ID
+        status: "Active", // Default status
+      });
+      setCategories((prev) => [...prev, response.data]);
+      alert("Category added successfully!");
+    } catch (error) {
+      console.error("Error adding category:", error);
+      alert("Failed to add category.");
+    }
+  };
+
+  const updateCategory = async (updatedCat: Category) => {
+    try {
+      await axios.put(
+        `http://localhost:8080/categories/${updatedCat.id}`,
+        updatedCat
+      );
+      setCategories((prev) =>
+        prev.map((cat) => (cat.id === updatedCat.id ? updatedCat : cat))
+      );
+      alert("Category updated successfully!");
+    } catch (error) {
+      console.error("Error updating category:", error);
+      alert("Failed to update category.");
+    }
+  };
+
+  const deleteCategory = async (id: string) => {
+    try {
+      await axios.delete(`http://localhost:8080/categories/${id}`);
+      setCategories((prev) => prev.filter((cat) => cat.id !== id));
+      alert("Category deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting category:", error);
+      alert("Failed to delete category.");
+    }
+  };
 
   // Lọc danh mục theo searchTerm
   const filteredCategories = useMemo(() => {
@@ -65,23 +125,20 @@ const CategoryPage: React.FC = () => {
     setCurrentPage(1); // Reset về trang đầu tiên khi tìm kiếm
   };
 
-  // Mở/khóa danh mục
-  const toggleCategoryStatus = (id: number) => {
-    setCategories((prevCategories) =>
-      prevCategories.map((category) =>
-        category.id === id
-          ? {
-              ...category,
-              status: category.status === "Active" ? "Inactive" : "Active",
-            }
-          : category
-      )
-    );
+  // Mở/khóa danh mục (Toggle Status)
+  const toggleCategoryStatus = async (id: string) => {
+    const categoryToToggle = categories.find((cat) => cat.id === id);
+    if (categoryToToggle) {
+      const newStatus =
+        categoryToToggle.status === "Active" ? "Inactive" : "Active";
+      const updatedCategory = { ...categoryToToggle, status: newStatus };
+      await updateCategory(updatedCategory); // Update via API
+    }
   };
 
   // Mở modal thêm danh mục mới
   const handleAddCategoryClick = () => {
-    setEditingCategory(null); // Đảm bảo là thêm mới
+    setEditingCategory(null);
     setCategoryName("");
     setCategoryImage("");
     setUploadedFileName(null);
@@ -94,27 +151,32 @@ const CategoryPage: React.FC = () => {
     setEditingCategory(category);
     setCategoryName(category.name);
     setCategoryImage(category.image);
-    setUploadedFileName(category.image.length > 5 ? "image.png" : null); // Giả định nếu là icon thì không hiển thị file name
-    setPreviewImage(category.image); // Sử dụng icon hoặc URL làm preview ban đầu
+
+    // Kiểm tra nếu image là URL (bắt đầu bằng http) hoặc base64 (data:image) thì hiển thị tên file giả định
+    if (category.image.startsWith("http") || category.image.startsWith("data:image")) {
+      setUploadedFileName("image.png"); // Placeholder file name
+    } else {
+      setUploadedFileName(null); // Không có file nếu là icon
+    }
+    setPreviewImage(category.image);
     setShowCategoryModal(true);
   };
 
-  // Xử lý khi chọn file ảnh (chỉ là placeholder cho UI)
+  // Xử lý khi chọn file ảnh (đọc thành Data URL để lưu vào API)
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       setUploadedFileName(file.name);
-      // Giả lập đường dẫn ảnh hoặc icon sau khi upload
       const reader = new FileReader();
       reader.onloadend = () => {
-        setCategoryImage(reader.result as string); // Lưu data URL cho xem trước hoặc URL ảo
+        setCategoryImage(reader.result as string); // Lưu Data URL vào state
         setPreviewImage(reader.result as string);
       };
       reader.readAsDataURL(file);
     }
   };
 
-  // Xóa ảnh đã upload (placeholder)
+  // Xóa ảnh đã upload
   const handleRemoveImage = () => {
     setCategoryImage("");
     setUploadedFileName(null);
@@ -122,7 +184,7 @@ const CategoryPage: React.FC = () => {
   };
 
   // Lưu danh mục (Thêm mới hoặc Cập nhật)
-  const handleSaveCategory = () => {
+  const handleSaveCategory = async () => {
     if (!categoryName.trim()) {
       alert("Tên danh mục không được để trống!");
       return;
@@ -130,27 +192,24 @@ const CategoryPage: React.FC = () => {
 
     if (editingCategory) {
       // Cập nhật danh mục
-      setCategories((prevCategories) =>
-        prevCategories.map((cat) =>
-          cat.id === editingCategory.id
-            ? { ...cat, name: categoryName, image: categoryImage }
-            : cat
-        )
-      );
+      const updatedCat: Category = {
+        ...editingCategory,
+        name: categoryName,
+        image: categoryImage || editingCategory.image, // Giữ ảnh cũ nếu không có ảnh mới
+      };
+      await updateCategory(updatedCat);
     } else {
       // Thêm danh mục mới
-      const newCategory: Category = {
-        id: nextCategoryId++,
+      const newCat: Omit<Category, "id" | "status"> = {
         name: categoryName,
         image: categoryImage || "❓", // Mặc định nếu không có ảnh
-        status: "Active", // Mặc định là Active khi thêm mới
       };
-      setCategories((prevCategories) => [...prevCategories, newCategory]);
+      await addCategory(newCat);
     }
     setShowCategoryModal(false); // Đóng modal
   };
 
-  // Hàm tạo các nút phân trang (sao chép từ UsersPage)
+  // Hàm tạo các nút phân trang
   const renderPaginationButtons = () => {
     const pageNumbers = [];
     let startPage = Math.max(1, currentPage - 2);
@@ -253,22 +312,18 @@ const CategoryPage: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {currentCategories.map((category) => (
+            {currentCategories.map((category, index) => (
               <tr key={category.id} style={categoryPageStyles.tableRow}>
-                <td style={categoryPageStyles.tableData}>{category.id}</td>
+                <td style={categoryPageStyles.tableData}>{indexOfFirstCategory + index + 1}</td> {/* Use calculated index for STT */}
                 <td
                   style={{ ...categoryPageStyles.tableData, cursor: "pointer" }}
-                  onClick={() => handleEditCategoryClick(category)} // Nhấn vào tên để chỉnh sửa
+                  onClick={() => handleEditCategoryClick(category)}
                 >
                   {category.name}
                 </td>
                 <td style={categoryPageStyles.tableData}>
                   {category.image.startsWith("http") ||
-                  category.image.startsWith("data:image") ||
-                  category.image.endsWith(".png") ||
-                  category.image.endsWith(".jpg") ||
-                  category.image.endsWith(".jpeg") ||
-                  category.image.endsWith(".gif") ? (
+                  category.image.startsWith("data:image") ? (
                     <img
                       src={category.image}
                       alt={category.name}
@@ -372,17 +427,21 @@ const CategoryPage: React.FC = () => {
                     Upload Image
                   </label>
                 </div>
-                {uploadedFileName && (
+                {previewImage && (
                   <div style={modalCategoryStyles.uploadedFile}>
-                    {previewImage && (
+                    {(previewImage.startsWith("http") || previewImage.startsWith("data:image")) ? (
                       <img
                         src={previewImage}
                         alt="Preview"
                         style={modalCategoryStyles.previewImage}
                       />
+                    ) : (
+                      <span style={categoryPageStyles.categoryImageText}>
+                        {previewImage}
+                      </span>
                     )}
                     <span style={modalCategoryStyles.fileName}>
-                      {uploadedFileName}
+                      {uploadedFileName || (previewImage.length > 1 ? "Custom Image" : "Emoji Icon")}
                     </span>
                     <button
                       onClick={handleRemoveImage}
@@ -392,23 +451,23 @@ const CategoryPage: React.FC = () => {
                     </button>
                   </div>
                 )}
-                {/* Fallback for icon if no image uploaded but category has an icon */}
-                {!uploadedFileName &&
-                  !previewImage &&
-                  editingCategory?.image.length === 1 && (
-                    <div style={modalCategoryStyles.uploadedFile}>
-                      <span style={categoryPageStyles.categoryImageText}>
-                        {editingCategory.image}
-                      </span>
-                      <span style={modalCategoryStyles.fileName}>
-                        Icon (no file)
-                      </span>
-                    </div>
-                  )}
               </div>
             </div>
 
             <div style={modalCategoryStyles.modalFooter}>
+              {editingCategory && ( // Chỉ hiện nút Delete khi đang chỉnh sửa
+                <button
+                  onClick={() => {
+                    if (window.confirm("Are you sure you want to delete this category?")) {
+                      deleteCategory(editingCategory.id);
+                      setShowCategoryModal(false);
+                    }
+                  }}
+                  style={{ ...modalCategoryStyles.cancelButton, color: "#cc0000", borderColor: "#ffdddd" }} // Custom delete style
+                >
+                  Delete
+                </button>
+              )}
               <button
                 onClick={() => setShowCategoryModal(false)}
                 style={modalCategoryStyles.cancelButton}
@@ -428,6 +487,7 @@ const CategoryPage: React.FC = () => {
     </div>
   );
 };
+
 
 export default CategoryPage;
 
@@ -454,9 +514,9 @@ const categoryPageStyles: { [key: string]: React.CSSProperties } = {
     cursor: "pointer",
     boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
     transition: "background-color 0.2s",
-    // "&:hover": {
-    //   backgroundColor: "#345bbd",
-    // },
+    "&:hover": {
+      backgroundColor: "#345bbd",
+    },
   },
   headerRight: {
     display: "flex",
@@ -516,9 +576,9 @@ const categoryPageStyles: { [key: string]: React.CSSProperties } = {
     textTransform: "uppercase",
   },
   tableRow: {
-    // "&:hover": {
-    //   backgroundColor: "#f9f9f9",
-    // },
+    "&:hover": {
+      backgroundColor: "#f9f9f9",
+    },
   },
   tableData: {
     padding: "15px 10px",
@@ -643,9 +703,9 @@ const modalCategoryStyles: { [key: string]: React.CSSProperties } = {
     fontSize: "1.5rem",
     color: "#999",
     cursor: "pointer",
-    // "&:hover": {
-    //   color: "#333",
-    // },
+    "&:hover": {
+      color: "#333",
+    },
   },
   modalBody: {
     flexGrow: 1,
@@ -667,11 +727,11 @@ const modalCategoryStyles: { [key: string]: React.CSSProperties } = {
     border: "1px solid #ddd",
     borderRadius: "8px",
     fontSize: "14px",
-    // "&:focus": {
-    //   outline: "none",
-    //   borderColor: "#4268F6",
-    //   boxShadow: "0 0 0 2px rgba(66, 104, 246, 0.2)",
-    // },
+    "&:focus": {
+      outline: "none",
+      borderColor: "#4268F6",
+      boxShadow: "0 0 0 2px rgba(66, 104, 246, 0.2)",
+    },
   },
   uploadArea: {
     border: "2px dashed #ff8c00", // Màu cam
@@ -681,10 +741,10 @@ const modalCategoryStyles: { [key: string]: React.CSSProperties } = {
     cursor: "pointer",
     backgroundColor: "#fff8f0", // Nền nhạt
     transition: "background-color 0.2s, border-color 0.2s",
-    // "&:hover": {
-    //   backgroundColor: "#fff3e6",
-    //   borderColor: "#ff6c00",
-    // },
+    "&:hover": {
+      backgroundColor: "#fff3e6",
+      borderColor: "#ff6c00",
+    },
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -704,9 +764,9 @@ const modalCategoryStyles: { [key: string]: React.CSSProperties } = {
     fontSize: "15px",
     fontWeight: "500",
     transition: "background-color 0.2s",
-    // "&:hover": {
-    //   backgroundColor: "#ff6c00",
-    // },
+    "&:hover": {
+      backgroundColor: "#ff6c00",
+    },
   },
   uploadedFile: {
     display: "flex",

@@ -21,9 +21,101 @@
       "id": "4"
     },
     {
-      "id": "aa0b",
-      "username": "kien8@gmail.com",
-      "password": "123456"
+      "username": "meo@gmail.com",
+      "password": "123456",
+      "id": "5"
+    }
+  ],
+  "categories": [
+    {
+      "id": "cat1",
+      "name": "Tiền tiết kiệm",
+      "image": "💰",
+      "status": "Active"
+    },
+    {
+      "id": "cat2",
+      "name": "Tiền vàng",
+      "image": "👑",
+      "status": "Inactive"
+    },
+    {
+      "id": "cat3",
+      "name": "Tiền ăn",
+      "image": "🍔",
+      "status": "Active"
+    },
+    {
+      "id": "cat4",
+      "name": "Tiền đi chơi",
+      "image": "🎲",
+      "status": "Inactive"
+    },
+    {
+      "id": "cat5",
+      "name": "Tiền cho con",
+      "image": "🍼",
+      "status": "Active"
+    },
+    {
+      "id": "cat6",
+      "name": "Tiền dự phòng",
+      "image": "💯",
+      "status": "Active"
+    },
+    {
+      "id": "cat7",
+      "name": "Tiền sửa đồ",
+      "image": "⚙️",
+      "status": "Inactive"
+    },
+    {
+      "id": "cat8",
+      "name": "Tiền cà phê",
+      "image": "☕",
+      "status": "Active"
+    },
+    {
+      "id": "cat9",
+      "name": "Tiền điện nước",
+      "image": "⚡",
+      "status": "Active"
+    },
+    {
+      "id": "cat10",
+      "name": "Tiền thuê nhà",
+      "image": "🏠",
+      "status": "Inactive"
+    },
+    {
+      "id": "cat11",
+      "name": "Tiền đi lại",
+      "image": "🚗",
+      "status": "Active"
+    },
+    {
+      "id": "cat12",
+      "name": "Tiền học phí",
+      "image": "📚",
+      "status": "Active"
+    },
+    {
+      "id": "cat13",
+      "name": "Tiền sức khỏe",
+      "image": "❤️",
+      "status": "Inactive"
+    },
+    {
+      "id": "1759973154852",
+      "month": "2025-10",
+      "name": "ăn",
+      "limit": 1222
+    },
+    {
+      "id": "1760044695793",
+      "month": "2025-10",
+      "name": "uống",
+      "limit": 89776
     }
   ],
   "financialData": [
@@ -36,8 +128,250 @@
     {
       "id": "2",
       "month": "2025-10",
-      "budget": 59999,
-      "balance": 6000000
+      "budget": 19000000,
+      "balance": 12000000
+    }
+  ],
+  "transactions": [
+    {
+      "id": "1",
+      "month": "2025-09",
+      "type": "expense",
+      "amount": 200000,
+      "categoryId": "cat1",
+      "categoryName": "Tiền ăn",
+      "note": "Ăn trưa",
+      "date": "2025-09-10"
+    },
+    {
+      "id": "2",
+      "month": "2025-09",
+      "type": "expense",
+      "amount": 50000,
+      "categoryId": "cat3",
+      "categoryName": "Tiền cà phê",
+      "note": "Cà phê sáng",
+      "date": "2025-09-10"
+    },
+    {
+      "id": "2",
+      "month": "2025-09",
+      "type": "expense",
+      "amount": 50000,
+      "categoryId": "cat3",
+      "categoryName": "Tiền cà phê",
+      "note": "Cà phê sáng",
+      "date": "2025-09-10"
+    },
+    {
+      "id": "2",
+      "month": "2025-09",
+      "type": "expense",
+      "amount": 50000,
+      "categoryId": "cat3",
+      "categoryName": "Tiền cà phê",
+      "note": "Cà phê sáng",
+      "date": "2025-09-10"
+    },
+    {
+      "id": "2",
+      "month": "2025-09",
+      "type": "expense",
+      "amount": 50000,
+      "categoryId": "cat3",
+      "categoryName": "Tiền cà phê",
+      "note": "Cà phê sáng",
+      "date": "2025-09-10"
+    },
+    {
+      "id": "2",
+      "month": "2025-09",
+      "type": "expense",
+      "amount": 50000,
+      "categoryId": "cat3",
+      "categoryName": "Tiền cà phê",
+      "note": "Cà phê sáng",
+      "date": "2025-09-10"
+    },
+    {
+      "id": "2",
+      "month": "2025-09",
+      "type": "expense",
+      "amount": 50000,
+      "categoryId": "cat3",
+      "categoryName": "Tiền cà phê",
+      "note": "Cà phê sáng",
+      "date": "2025-09-10"
+    },
+    {
+      "id": "2",
+      "month": "2025-09",
+      "type": "expense",
+      "amount": 50000,
+      "categoryId": "cat3",
+      "categoryName": "Tiền cà phê",
+      "note": "Cà phê sáng",
+      "date": "2025-09-10"
+    },
+    {
+      "id": "2",
+      "month": "2025-09",
+      "type": "expense",
+      "amount": 50000,
+      "categoryId": "cat3",
+      "categoryName": "Tiền cà phê",
+      "note": "Cà phê sáng",
+      "date": "2025-09-10"
+    },
+    {
+      "id": "2",
+      "month": "2025-09",
+      "type": "expense",
+      "amount": 50000,
+      "categoryId": "cat3",
+      "categoryName": "Tiền cà phê",
+      "note": "Cà phê sáng",
+      "date": "2025-09-10"
+    },
+    {
+      "id": "2",
+      "month": "2025-09",
+      "type": "expense",
+      "amount": 50000,
+      "categoryId": "cat3",
+      "categoryName": "Tiền cà phê",
+      "note": "Cà phê sáng",
+      "date": "2025-09-10"
+    },
+    {
+      "id": "trans_1760065339724",
+      "month": "2918-01",
+      "type": "expense",
+      "amount": 500000,
+      "categoryId": "1759973154852",
+      "categoryName": "ăn",
+      "note": "kien",
+      "date": "2025-10-10"
+    },
+    {
+      "id": "trans_1760065352690",
+      "month": "2918-01",
+      "type": "expense",
+      "amount": 5000,
+      "categoryId": "1759973154852",
+      "categoryName": "ăn",
+      "note": "kien",
+      "date": "2025-10-10"
+    },
+    {
+      "id": "trans_1760065362333",
+      "month": "2918-01",
+      "type": "expense",
+      "amount": 5000,
+      "categoryId": "1759973154852",
+      "categoryName": "ăn",
+      "note": "kien",
+      "date": "2025-10-10"
+    },
+    {
+      "id": "trans_1760065370268",
+      "month": "2918-01",
+      "type": "expense",
+      "amount": 59999,
+      "categoryId": "1759973154852",
+      "categoryName": "ăn",
+      "note": "kien",
+      "date": "2025-10-10"
+    },
+    {
+      "id": "trans_1760065377660",
+      "month": "2918-01",
+      "type": "expense",
+      "amount": 5000,
+      "categoryId": "1759973154852",
+      "categoryName": "ăn",
+      "note": "kien",
+      "date": "2025-10-10"
+    },
+    {
+      "id": "trans_1760065384668",
+      "month": "2918-01",
+      "type": "expense",
+      "amount": 500,
+      "categoryId": "1760044695793",
+      "categoryName": "uống",
+      "note": "kien",
+      "date": "2025-10-10"
+    },
+    {
+      "id": "trans_1760314381532",
+      "month": "2025-10",
+      "type": "expense",
+      "amount": 1000000,
+      "categoryId": "1759973154852",
+      "categoryName": "ăn",
+      "note": "ăn bánh",
+      "date": "2025-10-13"
+    },
+    {
+      "id": "trans_1760314431322",
+      "month": "2025-10",
+      "type": "expense",
+      "amount": 1000000,
+      "categoryId": "1759973154852",
+      "categoryName": "ăn",
+      "note": "ăn cơm",
+      "date": "2025-10-13"
+    },
+    {
+      "id": "trans_1760314446812",
+      "month": "2025-10",
+      "type": "expense",
+      "amount": 1000000,
+      "categoryId": "1760044695793",
+      "categoryName": "uống",
+      "note": "ăn mì",
+      "date": "2025-10-13"
+    },
+    {
+      "id": "trans_1760314462856",
+      "month": "2025-10",
+      "type": "expense",
+      "amount": 1000000,
+      "categoryId": "1759973154852",
+      "categoryName": "ăn",
+      "note": "ăn đồ hộp",
+      "date": "2025-10-13"
+    },
+    {
+      "id": "trans_1760314495139",
+      "month": "2025-10",
+      "type": "expense",
+      "amount": 1000000,
+      "categoryId": "1759973154852",
+      "categoryName": "ăn",
+      "note": "ăn sủi cảo",
+      "date": "2025-10-13"
+    },
+    {
+      "id": "trans_1760314512458",
+      "month": "2025-10",
+      "type": "expense",
+      "amount": 1000000,
+      "categoryId": "1759973154852",
+      "categoryName": "ăn",
+      "note": "ăn lẩu",
+      "date": "2025-10-13"
+    },
+    {
+      "id": "trans_1760317240203",
+      "month": "2025-10",
+      "type": "expense",
+      "amount": 1000000,
+      "categoryId": "1760044695793",
+      "categoryName": "uống",
+      "note": "uống nước ngọt",
+      "date": "2025-10-13"
     }
   ]
 }

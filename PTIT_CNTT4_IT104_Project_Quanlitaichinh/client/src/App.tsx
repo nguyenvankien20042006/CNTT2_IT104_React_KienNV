@@ -3,7 +3,11 @@ import LoginForm from './components/forms/LoginForm';
 
 import RegisterForm from './components/forms/RegisterForm';
 import Dashboard from './pages/admin/dashboard';
-import InfoManager from './pages/users/InfoManager';
+import DashboardLayout from './pages/users/UserDashboard';
+
+import InformationPage from './pages/users/InfoManager';
+import CategoryPage from './pages/admin/CategoryPage';
+import HistoryPage from './pages/users/HistoryManager';
 
 function App() {
   return (
@@ -22,7 +26,12 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
 
         {/**rote trang user */}
-        <Route path="/InfoManager" element={<InfoManager />} />
+        <Route path="/UserDashboard/*" element={<DashboardLayout />}>
+          <Route path="information" element={<InformationPage />} />
+          <Route path="category" element={<CategoryPage />} />
+          <Route path="history" element={<HistoryPage />} />
+          <Route index element={<InformationPage />} /> {/* route mặc định */}
+        </Route>
 
         {/* Route 404 - không tìm thấy trang */}
         <Route path="*" element={<Navigate to="/register" replace />} />
